@@ -1,0 +1,39 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+</head>
+<body>
+    
+    <h3>Searching User</h3>
+    <form action="/search" method="post">
+        <input type="search" name="search" placeholder="Search username ">
+        <button type="submit" name="submit-search">Search</button>
+    </form>
+    {%if users %}
+    <table>
+        <tr>
+            <th>Username</th>
+        </tr>
+        {% for user in users %}
+        {% if user.username != username %}
+        <tr>
+            <td><a href='/user/{{user.username}}'>{{user.username}}</a></td>
+            <td><a href='/follow/{{user.username}}'>Follow</a></td>            
+        </tr>
+        {% else %}
+        <tr>
+            <td><a href='/user/{{user.username}}'>{{user.username}}</a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+    <h1><a href="/home">Home</a><h1>
+</body>
+</html>

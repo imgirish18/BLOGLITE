@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <div>
+        <h1>Welcome {{username}} to this Blog Lite Web!!! </h1>
+        <a href="/search">Search |</a>  
+        <a href="/user/{{username}}">My Profile |</a>
+        <a href="/">Logout</a><br>
+        
+        <h2>Blog Details</h2>
+        {% if {{total_posts == 0}} }
+            <div>
+                <p> There are no posts in your feed. Connect with 
+                    other users to see what they are posting </p><br>
+            </div>
+            <a href="/addnewBlog"> Want to add New Blog </a>          
+
+        {%else%}
+            <div>
+                <table>
+                <thead>
+                    <th>Title</th>
+                    <th>Content</th> 
+                    <th>Posted by</th>
+                    <th>Created on</th>
+                    <th>Image</th>
+                    <th>No of Likes</th>
+                    <th>No of Comments</th>
+                    
+                </thead>
+                {% for post in blog %}
+                    <tbody>
+                        <td>{{blog.title}}</td>
+                        <td>{{blog.content}}</td>
+                        <td><a href="/user/{{blog.username}}" >{{blog.username}}</a></td>
+                        <td>{{blog.timestamp}}</td>
+                        <td><img src="{{blog.image_url}}" alt="image" width="100" height="100"></td>
+                        <td>{{blog.likes}}</td>
+                        <td>{{blog.comments}}</td>
+                        {% if blog.blog_id in liked_list %}
+                        <td><a href="/unlike/{{blog.blog_id}}/{{username}}">Like</a></td>
+                        {% else %}
+                        <td><a href="/like/{{blog.blog_id}}/{{username}}">Unlike</a></td>
+                        {% endif %}
+                        <td><a href="/comment/{{blog.blog_id}}/{{username}}">Comment</a></td>
+                    </tbody>
+                        {% endfor %}
+                    {%endif %}
+                </table>
+            </div>
+            <a href="/addnewBlog"> Want to add New Blog </a>          
+
+    </div>
+</body>
+</html>
